@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,17 +9,41 @@ import { Search, User, ShoppingCart, Menu, X } from "lucide-react";
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "Studio Booking", path: "/studio" },
-  { name: "Pet Booking", path: "/pet" },
+  { name: "Product", path: "/Product" },
   { name: "Services", path: "/services" },
   { name: "Gallery", path: "/gallery" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showNav, setShowNav] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
 
+  // Handle scroll behavior
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        // scrolling down
+        setShowNav(false);
+      } else {
+        // scrolling up
+        setShowNav(true);
+      }
+      setLastScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
   return (
-    <nav className="border-b shadow-sm py-4 sticky top-0 bg-white z-50">
+    <motion.nav
+      initial={{ y: 0 }}
+      animate={{ y: showNav ? 0 : -100 }} // slide out/in
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+      className="border-b shadow-sm py-4 sticky top-0 bg-white z-50"
+    >
       <div className="max-w-6xl mx-auto flex items-center justify-between px-10">
         {/* Logo */}
         <div className="text-2xl font-bold uppercase">FarmhouseStudio</div>
@@ -28,7 +52,6 @@ export default function Navbar() {
         <ul className="hidden md:flex gap-8 text-lg font-medium text-gray-700 relative">
           {navLinks.map((link) => {
             const isActive = pathname === link.path;
-
             return (
               <li key={link.path} className="relative group">
                 <Link
@@ -38,14 +61,10 @@ export default function Navbar() {
                   }`}
                 >
                   {link.name}
-
-                  {/* Only show hover underline if NOT active */}
                   {!isActive && (
                     <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-black transition-all duration-300 group-hover:w-full"></span>
                   )}
                 </Link>
-
-                {/* Active underline (always visible, no animation) */}
                 {isActive && (
                   <div className="absolute left-0 right-0 -bottom-1 h-[2px] bg-black"></div>
                 )}
@@ -54,13 +73,11 @@ export default function Navbar() {
           })}
         </ul>
 
-        {/* Right side: icons */}
+        {/* Right side icons */}
         <div className="flex gap-4 items-center">
           <Search className="w-5 h-5 cursor-pointer hidden md:block" />
           <User className="w-5 h-5 cursor-pointer hidden md:block" />
           <ShoppingCart className="w-5 h-5 cursor-pointer hidden md:block" />
-
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden"
             onClick={() => setIsOpen((prev) => !prev)}
@@ -83,7 +100,6 @@ export default function Navbar() {
             <ul className="flex flex-col gap-4 text-gray-700 font-medium">
               {navLinks.map((link) => {
                 const isActive = pathname === link.path;
-
                 return (
                   <li key={link.path} className="relative group">
                     <Link
@@ -94,14 +110,10 @@ export default function Navbar() {
                       onClick={() => setIsOpen(false)}
                     >
                       {link.name}
-
-                      {/* Hover underline only if not active */}
                       {!isActive && (
                         <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-black transition-all duration-300 group-hover:w-full"></span>
                       )}
                     </Link>
-
-                    {/* Active underline */}
                     {isActive && (
                       <div className="absolute left-0 right-0 -bottom-1 h-[2px] bg-black"></div>
                     )}
@@ -109,8 +121,6 @@ export default function Navbar() {
                 );
               })}
             </ul>
-
-            {/* Mobile icons */}
             <div className="flex gap-6 pt-4 border-t">
               <Search className="w-5 h-5 cursor-pointer" />
               <User className="w-5 h-5 cursor-pointer" />
@@ -119,6 +129,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 }

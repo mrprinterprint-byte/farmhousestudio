@@ -7,7 +7,7 @@ export default function Home() {
     <div className="font-sans">
     
       <HeroSection src="/second.jpg" alt="Hero Image" />
-      <HeroSection src="/First.jpg" alt="Second Hero Image" />
+      <HeroSection src="/first.jpg" alt="Second Hero Image" />
     </div>
   );
 }
