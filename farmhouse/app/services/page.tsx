@@ -1,7 +1,7 @@
 export default function Services(){
     return (
         <div>
-            This is the services 
+           i am just brainstorming idea on services it's just hard to come up with idea. 
             
         </div>
     )

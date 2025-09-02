@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, User, ShoppingCart, Menu, X } from "lucide-react";
-
+import IconButtons from "./IconButtons";
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "Studio Booking", path: "/studio" },
@@ -75,9 +75,7 @@ export default function Navbar() {
 
         {/* Right side icons */}
         <div className="flex gap-4 items-center">
-          <Search className="w-5 h-5 cursor-pointer hidden md:block" />
-          <User className="w-5 h-5 cursor-pointer hidden md:block" />
-          <ShoppingCart className="w-5 h-5 cursor-pointer hidden md:block" />
+         <IconButtons/>
           <button
             className="md:hidden"
             onClick={() => setIsOpen((prev) => !prev)}
@@ -122,9 +120,7 @@ export default function Navbar() {
               })}
             </ul>
             <div className="flex gap-6 pt-4 border-t">
-              <Search className="w-5 h-5 cursor-pointer" />
-              <User className="w-5 h-5 cursor-pointer" />
-              <ShoppingCart className="w-5 h-5 cursor-pointer" />
+             <IconButtons/>
             </div>
           </motion.div>
         )}

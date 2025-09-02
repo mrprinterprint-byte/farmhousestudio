@@ -1,7 +1,7 @@
 "use client";
 
 import { Search, User, ShoppingCart } from "lucide-react";
-
+import Link from "next/link";
 interface IconButtonsProps {
   onSearch?: () => void;
   onProfile?: () => void;
@@ -23,8 +23,10 @@ export default function IconButtons({
       <button onClick={onProfile}>
         <User className="w-5 h-5 cursor-pointer" />
       </button>
-      <button onClick={onCart}>
+      <button>
+        <Link href={"/cart"}>
         <ShoppingCart className="w-5 h-5 cursor-pointer" />
+        </Link>
       </button>
     </div>
   );
