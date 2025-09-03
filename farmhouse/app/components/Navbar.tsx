@@ -8,6 +8,7 @@ import { Search, User, ShoppingCart, Menu, X } from "lucide-react";
 import IconButtons from "./IconButtons";
 const navLinks = [
   { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
   { name: "Studio Booking", path: "/studio" },
   { name: "Product", path: "/Product" },
   { name: "Services", path: "/services" },
