@@ -1,11 +1,26 @@
 "use client";
 
-import { useState } from "react";
-import { products } from "../data/products/products";
+import { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabaseClient"; 
 
 export default function ProductsPage() {
+  const [products, setProducts] = useState<any[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [selectedSize, setSelectedSize] = useState<string>("");
+
+  // Fetch products from Supabase
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data, error } = await supabase.from("products").select("*");
+      if (error) {
+        console.error("Error fetching products:", error);
+      } else {
+        setProducts(data || []);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   // Add item to localStorage cart
   const addToCart = (product: any) => {
@@ -13,7 +28,6 @@ export default function ProductsPage() {
     const item = { ...product, size: selectedSize || product.sizes[0], qty: 1 };
     cart.push(item);
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Added to cart!");
   };
 
   return (
@@ -39,10 +53,7 @@ export default function ProductsPage() {
                   ${product.price}
                 </span>
                 <span className="text-black font-semibold">
-                  ${(
-                    product.price *
-                    (1 - product.discount / 100)
-                  ).toFixed(2)}
+                  ${(product.price * (1 - (product.discount || 0) / 100)).toFixed(2)}
                 </span>
               </div>
             </div>
@@ -53,16 +64,17 @@ export default function ProductsPage() {
       {/* Modal / Product Detail */}
       {selectedProduct && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white max-w-4xl w-full rounded-lg p-6 relative">
+          <div className="bg-white max-w-4xl w-full max-h-[90vh] rounded-lg p-6 relative overflow-y-auto">
             <button
-              className="absolute top-4 right-4 text-black text-xl"
+              className="sticky top-2 right-2 ml-auto block text-black text-xl"
               onClick={() => setSelectedProduct(null)}
             >
               ×
             </button>
+
             <div className="grid md:grid-cols-2 gap-6">
               {/* Product Images */}
-              <div>
+              <div className="overflow-y-auto max-h-[70vh]">
                 {selectedProduct.images.map((img: string, idx: number) => (
                   <img
                     key={idx}
@@ -75,9 +87,7 @@ export default function ProductsPage() {
 
               {/* Product Info */}
               <div>
-                <h2 className="text-2xl font-bold mb-2">
-                  {selectedProduct.name}
-                </h2>
+                <h2 className="text-2xl font-bold mb-2">{selectedProduct.name}</h2>
                 <p className="text-gray-700 mb-4">{selectedProduct.description}</p>
 
                 <div className="mb-4">
@@ -100,10 +110,7 @@ export default function ProductsPage() {
                     ${selectedProduct.price}
                   </span>
                   <span className="text-black font-bold text-xl">
-                    ${(
-                      selectedProduct.price *
-                      (1 - selectedProduct.discount / 100)
-                    ).toFixed(2)}
+                    ${(selectedProduct.price * (1 - (selectedProduct.discount || 0) / 100)).toFixed(2)}
                   </span>
                 </div>
 

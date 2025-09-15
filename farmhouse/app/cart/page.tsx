@@ -16,6 +16,25 @@ interface CartItem {
 export default function CartPage() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [search, setSearch] = useState("");
+const handleCheckout = async () => {
+  try {
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ cartItems: selectedItems }),
+    });
+
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url; // redirect to Stripe Checkout
+    } else {
+      alert("Checkout failed");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong");
+  }
+};
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -158,16 +177,16 @@ export default function CartPage() {
           </p>
         </div>
         <button
-          disabled={selectedItems.length === 0}
-          className={`px-6 py-2 rounded text-white font-semibold transition ${
-            selectedItems.length > 0
-              ? "bg-black hover:bg-gray-800"
-              : "bg-gray-400 cursor-not-allowed"
-          }`}
-          onClick={() => alert("Proceed to checkout!")}
-        >
-          Checkout
-        </button>
+  disabled={selectedItems.length === 0}
+  className={`px-6 py-2 rounded text-white font-semibold transition ${
+    selectedItems.length > 0
+      ? "bg-black hover:bg-gray-800"
+      : "bg-gray-400 cursor-not-allowed"
+  }`}
+  onClick={handleCheckout} // <-- change here
+>
+  Checkout
+</button>
       </div>
     </div>
   );
