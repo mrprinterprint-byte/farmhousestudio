@@ -10,8 +10,8 @@ const images = [
   "/gallery2.jpg",
   "/gallery3.jpg",
   "/gallery4.jpg",
-  "/gallery5.jpg",
-  "/gallery6.jpg",
+  "/gallery8.png",
+  "/gallery7.png",
 ];
 
 export default function GalleryPage() {

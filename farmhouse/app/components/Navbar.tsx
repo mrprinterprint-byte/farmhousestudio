@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image"; // ✅ logo support
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, User, ShoppingCart, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import IconButtons from "./IconButtons";
+
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
@@ -25,10 +27,8 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > lastScrollY) {
-        // scrolling down
         setShowNav(false);
       } else {
-        // scrolling up
         setShowNav(true);
       }
       setLastScrollY(window.scrollY);
@@ -41,13 +41,21 @@ export default function Navbar() {
   return (
     <motion.nav
       initial={{ y: 0 }}
-      animate={{ y: showNav ? 0 : -100 }} // slide out/in
+      animate={{ y: showNav ? 0 : -100 }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
       className="border-b shadow-sm py-4 sticky top-0 bg-white z-50"
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between px-10">
-        {/* Logo */}
-        <div className="text-2xl font-bold uppercase">FarmhouseStudio</div>
+        {/* ✅ Logo Only */}
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo.png" // put logo in /public/logo.png
+            alt="Farmhouse Studio Logo"
+            width={50}
+            height={50}
+            className="object-contain"
+          />
+        </Link>
 
         {/* Desktop Nav */}
         <ul className="hidden md:flex gap-8 text-lg font-medium text-gray-700 relative">
@@ -76,7 +84,7 @@ export default function Navbar() {
 
         {/* Right side icons */}
         <div className="flex gap-4 items-center">
-         <IconButtons/>
+          <IconButtons />
           <button
             className="md:hidden"
             onClick={() => setIsOpen((prev) => !prev)}
@@ -121,7 +129,7 @@ export default function Navbar() {
               })}
             </ul>
             <div className="flex gap-6 pt-4 border-t">
-             <IconButtons/>
+              <IconButtons />
             </div>
           </motion.div>
         )}

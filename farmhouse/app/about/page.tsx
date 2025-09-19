@@ -6,31 +6,43 @@ import { motion, AnimatePresence } from "framer-motion";
 const animals = [
   {
     id: 1,
-    name: "Bella the Cow",
-    image: "/cow.jpg",
+    name: "Scar",
+    image: "/1.jpg",
     description:
-      "Bella is our gentle dairy cow, always ready to greet visitors with calm eyes and a friendly moo.",
+      "He thinks he’s the king of the farm, strutting around like he is wearing an invisible crown. If you give him a bucket, he’ll knock it over, not because he’s hungry, but because chaos is his hobby",
   },
   {
     id: 2,
-    name: "Charlie the Horse",
-    image: "/horse.jpg",
+    name: "Boba",
+    image: "/2.jpg",
     description:
-      "Charlie loves open fields and enjoys giving children short rides during farm visits.",
+"Always hungry, always chewing. If it looks edible (and even if it doesn’t), he’ll give it a try. He’s basically a four legged vacuum with horns and a mischievous twinkle in his eye."
   },
   {
     id: 3,
-    name: "Daisy the Goat",
-    image: "/goat.jpg",
+    name: "Rocky",
+    image: "/3.jpg",
     description:
-      "Playful and curious, Daisy is the star of the farmhouse, always climbing and exploring.",
+      "He “talks” all day long with grumbles and bleats, like he is telling you the farm’s latest gossip. If the other goats do something silly, Rocky makes sure everyone knows about it."
   },
   {
     id: 4,
-    name: "Sunny the Chicken",
-    image: "/chicken.jpg",
+    name: "Pope",
+    image: "/4.jpg",
     description:
-      "Sunny provides us with fresh eggs daily and loves to roam around the farmhouse yard.",
+      "Pope is the thoughtful one of the herd, carrying himself with a calm and serious air. He often stands back, quietly observing before joining in, as if he’s making sure everything is just right. But beneath that steady nature is a friendly heart—he’s always happy to welcome a pat or walk beside you once he’s decided you’re a friend. Pope may be serious, but he’s the kind of goat that makes the farm feel safe and grounded",
+  }, {
+    id: 5,
+    name: "Mars",
+    image: "/5.jpg",
+    description:
+      "Mars is one of the sweetest souls on the farm. He loves showing you his toys, happily trotting over to share them before nudging in for a gentle pat on the head. He likes to sit by you and walk by your side through the fields. Mars likes to keep a watchful eye on his farm friends, and carries himself like a true gentleman - kind, calm and always looking out for everyone around him.",
+  },{
+    id: 6,
+    name: "Harley",
+    image: "/6.jpg",
+    description:
+      "She’s a bundle of energy, always ready to run, play, and make friends with every animal she meets. Her favorite hobby is sneaking bites from your plate, because of her, food is pure joy. When she is not chasing after a ball or racing across the yard, she’s the most lovable cuddle bug, curling up in her bed and drifting into the coziest sleep. With her playful spirit and friendly heart, she fills everyday with laughter and warmth",
   },
 ];
 
@@ -45,7 +57,7 @@ export default function AboutPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         className="h-[28rem] flex items-center justify-center bg-cover bg-center relative"
-        style={{ backgroundImage: "url('/farmhouse-hero.jpg')" }}
+        style={{ backgroundImage: "url('/panaroma.jpg')" }}
       >
         <div className="absolute inset-0 bg-black/40"></div>
         <h1 className="relative z-10 text-5xl md:text-6xl font-bold text-white drop-shadow-xl text-center">
@@ -66,10 +78,14 @@ export default function AboutPage() {
             Our Farmhouse Story
           </h2>
           <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
-            Nestled among rolling fields and open skies, our farmhouse is more
-            than just a place — it’s a way of life. Rooted in simplicity and
-            warmth, it’s where rustic charm meets nature’s beauty. Here,
-            tradition and care breathe life into everything we do.
+           Our farm, originally built in 1901 and purchased by our family in 2018, has become a cherished place where we gather to reconnect, and make lasting memories together and with our friends. 
+After a busy and sometimes stressful week, escaping to the farm feels like a breath of fresh air. The serene fields and glowing sunsets invite you to slow down and unwind. There is nothing quite like spending time with the animals, letting their presence sooth and refresh you.  
+We began with adopting our dogs Harley and Mars. Harley is half hound half boxer and Mars is a Golden Retriever. They both are  happy and friendly dogs that enjoy  interacting and playing with those around them. They also help take care of our farm and the other animals!  
+We then adopted many chickens and baby chicks and along the way learned how to create a healthy environment for them to thrive in. Our chickens provide us with fresh eggs to eat on a daily!
+To expand our farm family even more, we brought in some beautiful peacocks, mischievous goats and the three cutest cats! 
+All of these farm members add to the farm by bringing joy, life and a sense of wonder to every corner.
+Whether you are looking for a retreat, a chance to capture timeless photos, or simply a day surrounded by nature and happy memories, our farm feels like a world apart. Explore sunlit fields, watch the sky glow at sunset, and meet animals that seem to have their own stories to tell. Here, every moment sparkles with wonder and creates memories that linger long after you leave.
+
           </p>
         </motion.section>
 
@@ -113,43 +129,43 @@ export default function AboutPage() {
       </main>
 
       {/* Modal for expanded animal view */}
-      <AnimatePresence>
-        {selected && (
-          <motion.div
-            className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <motion.div
-              layoutId={`animal-${selected.id}`}
-              className="bg-white rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              <img
-                src={selected.image}
-                alt={selected.name}
-                className="w-full h-96 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-3xl font-bold text-amber-900 mb-3">
-                  {selected.name}
-                </h3>
-                <p className="text-gray-700 text-lg">{selected.description}</p>
-                <button
-                  className="mt-6 px-6 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg"
-                  onClick={() => setSelected(null)}
-                >
-                  Close
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+   <AnimatePresence>
+  {selected && (
+    <motion.div
+      className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={() => setSelected(null)} // close when clicking background
+    >
+      <motion.div
+        className="relative"
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.8, opacity: 0 }}
+        transition={{ duration: 0.4 }}
+        onClick={(e) => e.stopPropagation()} // prevent background close
+      >
+        {/* Close button */}
+        <button
+          className="absolute -top-4 -right-4 text-white bg-black/70 hover:bg-black/90 rounded-full p-2"
+          onClick={() => setSelected(null)}
+        >
+          ✕
+        </button>
+
+        {/* Image itself defines popup size */}
+        <img
+          src={selected.image}
+          alt={selected.name}
+          className="max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl"
+        />
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
+
     </div>
   );
 }
