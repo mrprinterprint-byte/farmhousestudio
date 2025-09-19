@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image"; // ✅ logo support
+import Image from "next/image"; 
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -41,24 +41,24 @@ export default function Navbar() {
   return (
     <motion.nav
       initial={{ y: 0 }}
-      animate={{ y: showNav ? 0 : -100 }}
+      animate={{ y: showNav ? 0 : -120 }} // navbar moves out when scrolling
       transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="border-b shadow-sm py-4 sticky top-0 bg-white z-50"
+      className="border-b shadow-sm py-6 sticky top-0 bg-white z-50" // ✅ more padding
     >
-      <div className="max-w-6xl mx-auto flex items-center justify-between px-10">
-        {/* ✅ Logo Only */}
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-12">
+        {/* ✅ Bigger Logo */}
         <Link href="/" className="flex items-center">
           <Image
-            src="/logo.png" // put logo in /public/logo.png
+            src="/logo.png"
             alt="Farmhouse Studio Logo"
-            width={50}
-            height={50}
+            width={100}   // doubled
+            height={100}  // doubled
             className="object-contain"
           />
         </Link>
 
-        {/* Desktop Nav */}
-        <ul className="hidden md:flex gap-8 text-lg font-medium text-gray-700 relative">
+        {/* ✅ Desktop Nav Larger */}
+        <ul className="hidden md:flex gap-12 text-xl font-semibold text-gray-700 relative">
           {navLinks.map((link) => {
             const isActive = pathname === link.path;
             return (
@@ -66,16 +66,16 @@ export default function Navbar() {
                 <Link
                   href={link.path}
                   className={`hover:text-black relative ${
-                    isActive ? "text-black font-semibold" : ""
+                    isActive ? "text-black font-bold" : ""
                   }`}
                 >
                   {link.name}
                   {!isActive && (
-                    <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-black transition-all duration-300 group-hover:w-full"></span>
+                    <span className="absolute left-0 -bottom-2 h-[3px] w-0 bg-black transition-all duration-300 group-hover:w-full"></span>
                   )}
                 </Link>
                 {isActive && (
-                  <div className="absolute left-0 right-0 -bottom-1 h-[2px] bg-black"></div>
+                  <div className="absolute left-0 right-0 -bottom-2 h-[3px] bg-black"></div>
                 )}
               </li>
             );
@@ -83,13 +83,13 @@ export default function Navbar() {
         </ul>
 
         {/* Right side icons */}
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-6 items-center">
           <IconButtons />
           <button
             className="md:hidden"
             onClick={() => setIsOpen((prev) => !prev)}
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={32} /> : <Menu size={32} />} {/* ✅ bigger icons */}
           </button>
         </div>
       </div>
@@ -102,9 +102,9 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-gray-50 border-t px-6 py-4 space-y-4"
+            className="md:hidden bg-gray-50 border-t px-8 py-6 space-y-6"
           >
-            <ul className="flex flex-col gap-4 text-gray-700 font-medium">
+            <ul className="flex flex-col gap-6 text-xl font-semibold text-gray-700">
               {navLinks.map((link) => {
                 const isActive = pathname === link.path;
                 return (
@@ -112,23 +112,23 @@ export default function Navbar() {
                     <Link
                       href={link.path}
                       className={`block relative ${
-                        isActive ? "text-black font-semibold" : "hover:text-black"
+                        isActive ? "text-black font-bold" : "hover:text-black"
                       }`}
                       onClick={() => setIsOpen(false)}
                     >
                       {link.name}
                       {!isActive && (
-                        <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-black transition-all duration-300 group-hover:w-full"></span>
+                        <span className="absolute left-0 -bottom-2 h-[3px] w-0 bg-black transition-all duration-300 group-hover:w-full"></span>
                       )}
                     </Link>
                     {isActive && (
-                      <div className="absolute left-0 right-0 -bottom-1 h-[2px] bg-black"></div>
+                      <div className="absolute left-0 right-0 -bottom-2 h-[3px] bg-black"></div>
                     )}
                   </li>
                 );
               })}
             </ul>
-            <div className="flex gap-6 pt-4 border-t">
+            <div className="flex gap-8 pt-6 border-t">
               <IconButtons />
             </div>
           </motion.div>

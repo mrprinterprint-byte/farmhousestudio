@@ -48,7 +48,7 @@ export default function Services() {
         transition={{ duration: 1 }}
         className="h-72 flex items-center justify-center bg-cover bg-center relative"
       >
-        <h1 className="relative z-10 text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-white to-amber-500 drop-shadow-xl text-center">
+        <h1 className="relative z-10 text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-black to-amber-500 drop-shadow-xl text-center">
           Our Services
         </h1>
       </motion.header>
