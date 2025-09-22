@@ -3,10 +3,23 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Farmhouse Studio",
-  description: "Creative photography studio",
+export const metadata = {
+  title: "Farmhouse Studio - Photography & Creative Space",
+  description: "Book your photography or video session at Farmhouse Studio. Natural light, rustic charm, and modern equipment.",
+  robots: { index: true, follow: true },
+  openGraph: {
+    title: "Farmhouse Studio",
+    description: "Photography sessions in a rustic farmhouse setting.",
+    url: "https://farmhousestudios.com",
+    siteName: "Farmhouse Studio",
+    images: [
+      { url: "/first.JPG", width: 1200, height: 630, alt: "Farmhouse Studio Preview" },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
 };
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
