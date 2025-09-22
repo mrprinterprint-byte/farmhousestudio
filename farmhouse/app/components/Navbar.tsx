@@ -84,14 +84,18 @@ export default function Navbar() {
 
         {/* Right side icons */}
         <div className="flex gap-6 items-center">
-          <IconButtons />
-          <button
-            className="md:hidden"
-            onClick={() => setIsOpen((prev) => !prev)}
-          >
-            {isOpen ? <X size={32} /> : <Menu size={32} />} {/* ✅ bigger icons */}
-          </button>
-        </div>
+  {/* IconButtons */}
+  <IconButtons />
+
+  {/* Mobile menu toggle */}
+  <button
+    className="md:hidden"
+    onClick={() => setIsOpen((prev) => !prev)}
+    aria-label={isOpen ? "Close menu" : "Open menu"} // ✅ ARIA label added
+  >
+    {isOpen ? <X size={32} /> : <Menu size={32} />}
+  </button>
+</div>
       </div>
 
       {/* Mobile Dropdown */}
