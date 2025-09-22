@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://farmhousestudios.com
+
+# Sitemaps
+Sitemap: https://farmhousestudios.com/sitemap.xml
