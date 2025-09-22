@@ -96,9 +96,9 @@ export default function Footer() {
           {/* Contact + Socials */}
           <div>
             <h3 className="text-lg font-semibold text-white mb-4">Get in Touch</h3>
-            <p className="text-sm mb-2">123 Business St, City, Country</p>
+            <p className="text-sm mb-2">Orangeville, Canada, Ontario</p>
             <p className="text-sm mb-2">Email: info@farmhousestudios.com</p>
-            <p className="text-sm mb-4">Phone: +1 (123) 456-7890</p>
+            <p className="text-sm mb-4">Phone: +1 (437) 438-3341</p>
 
             <div className="flex space-x-4">
               <a
@@ -116,7 +116,7 @@ export default function Footer() {
                 <FaTwitter size={20} />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/farmhousestudios?igsh=NzNveWkzeGc3bzk4"
                 aria-label="Instagram"
                 className="hover:text-white transition-colors"
               >
