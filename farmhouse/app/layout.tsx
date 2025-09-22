@@ -1,21 +1,25 @@
 import "./globals.css";
-import type { Metadata } from "next";
 import Navbar from "./components/Navbar";
-import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
+import type { Metadata } from "next";
+
 export const metadata: Metadata = {
   title: "Farmhouse Studio",
-  description: "Photo studio booking & gallery",
+  description: "Creative photography studio",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>
-          <TopBar />
+      <body className="flex flex-col min-h-screen">
+        {/* Navbar */}
         <Navbar />
-        <main>{children}</main>
-        <Footer/>
+
+        {/* Main Content - grows to fill space */}
+        <main className="flex-grow">{children}</main>
+
+        {/* Footer always at bottom */}
+        <Footer />
       </body>
     </html>
   );
