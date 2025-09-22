@@ -20,7 +20,7 @@ export default function Home() {
           className="object-cover opacity-70"
           priority
         />
-        <div className="relative z-10 text-center text-white px-6">
+        <div className="relative z-10 text-center text-white px-6 mt-6">
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}

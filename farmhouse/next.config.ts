@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 
   // ✅ Add security headers
+  /*
   async headers() {
     return [
       {
@@ -19,6 +20,7 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  */
 };
 
 export default nextConfig;
