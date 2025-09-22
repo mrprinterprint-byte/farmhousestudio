@@ -135,7 +135,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-10 border-t border-gray-700 pt-6 text-sm text-center text-gray-400">
-          © {new Date().getFullYear()} Your Company. All rights reserved.
+          © {new Date().getFullYear()} Farmhouse Studios. All rights reserved.
         </div>
       </div>
     </footer>
