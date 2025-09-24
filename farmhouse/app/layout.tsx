@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import type { Metadata } from "next";
 
+
 export const metadata = {
   title: "Farmhouse Studio - Photography & Creative Space",
   description: "Book your photography or video session at Farmhouse Studio. Natural light, rustic charm, and modern equipment.",
@@ -10,28 +11,42 @@ export const metadata = {
   openGraph: {
     title: "Farmhouse Studio",
     description: "Photography sessions in a rustic farmhouse setting.",
-    url: "https://farmhousestudios.com",
+    url: "https://farmhousestudios.ca",
     siteName: "Farmhouse Studio",
     images: [
-      { url: "/first.JPG", width: 1200, height: 630, alt: "Farmhouse Studio Preview" },
-    ],
+  { 
+    url: "https://farmhousestudios.ca/first.JPG", 
+    width: 1200, 
+    height: 630, 
+    alt: "Farmhouse Studio Preview" 
+  },
+],
+
     locale: "en_US",
     type: "website",
   },
 };
 
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Farmhouse Studio",
+              url: "https://farmhousestudios.ca",
+              logo: "https://farmhousestudios.ca/logo.png"
+            }),
+          }}
+        />
+      </head>
       <body className="flex flex-col min-h-screen">
-        {/* Navbar */}
         <Navbar />
-
-        {/* Main Content - grows to fill space */}
         <main className="flex-grow">{children}</main>
-
-        {/* Footer always at bottom */}
         <Footer />
       </body>
     </html>
