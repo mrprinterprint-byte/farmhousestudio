@@ -12,52 +12,59 @@ export default function Home() {
   return (
     <main className="font-sans">
       {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-center justify-center bg-black">
-        <Image
-          src="/first.JPG"
-          alt="Farmhouse Studio"
-          fill
-          className="object-cover opacity-70"
-          priority
-        />
-        <div className="relative z-10 text-center text-white px-6 mt-6">
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl font-bold"
-          >
-            Welcome to Farmhouse Studio
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="mt-4 text-lg md:text-xl max-w-2xl mx-auto"
-          >
-            A peaceful retreat where creativity meets nature.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="mt-6 flex gap-4 justify-center"
-          >
-            <Link
-              href="/studio"
-              className="px-6 py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition"
-            >
-              Book Now
-            </Link>
-            <Link
-              href="/gallery"
-              className="px-6 py-3 bg-white text-black rounded-full hover:bg-gray-200 transition"
-            >
-              View Gallery
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+     {/* Hero Section */}
+{/* Hero Section */}
+<section className="relative h-[90vh] flex items-center justify-center bg-black">
+  <Image
+    src="/first.JPG"
+    alt="Farmhouse Studio"
+    fill
+    className="object-cover opacity-70"
+    priority
+  />
+
+  {/* Text + Buttons Overlay */}
+  <div className="relative z-10 text-center text-white px-6 translate-y-16 md:translate-y-24">
+    <motion.h1
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="text-4xl md:text-6xl font-bold"
+    >
+      Welcome to Farmhouse Studios
+    </motion.h1>
+
+    <motion.p
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.5, duration: 0.8 }}
+      className="mt-4 text-lg md:text-xl max-w-2xl mx-auto"
+    >
+      A peaceful retreat where creativity meets nature.
+    </motion.p>
+
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.8 }}
+      className="mt-6 flex gap-4 justify-center flex-wrap"
+    >
+      <Link
+        href="/studio"
+        className="px-6 py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition"
+      >
+        Book Now
+      </Link>
+      <Link
+        href="/gallery"
+        className="px-6 py-3 bg-white text-black rounded-full hover:bg-gray-200 transition"
+      >
+        View Gallery
+      </Link>
+    </motion.div>
+  </div>
+</section>
+
 
       {/* About Section */}
       <section className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-12 items-center">

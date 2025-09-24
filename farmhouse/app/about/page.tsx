@@ -46,6 +46,28 @@ const animals = [
   },
 ];
 
+function ReadMore({ text }: { text: string }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <p className="text-gray-600">
+      {isExpanded ? text : text.slice(0, 100) + (text.length > 100 ? "..." : "")}
+      {text.length > 100 && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation(); // prevent triggering modal
+            setIsExpanded(!isExpanded);
+          }}
+          className="ml-2 text-emerald-700 font-medium hover:underline"
+        >
+          {isExpanded ? "Read Less" : "Read More"}
+        </button>
+      )}
+    </p>
+  );
+}
+
+
 export default function AboutPage() {
   const [selected, setSelected] = useState<null | typeof animals[0]>(null);
 
@@ -101,28 +123,30 @@ Whether you are looking for a retreat, a chance to capture timeless photos, or s
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {animals.map((animal, index) => (
-              <motion.div
-                key={animal.id}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                onClick={() => setSelected(animal)}
-                className="cursor-pointer rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl bg-white"
-              >
-                <motion.img
-                  src={animal.image}
-                  alt={animal.name}
-                  className="w-full h-72 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-2xl font-semibold text-amber-800 mb-2">
-                    {animal.name}
-                  </h3>
-                  <p className="text-gray-600 line-clamp-2">
-                    {animal.description}
-                  </p>
-                </div>
-              </motion.div>
+             <motion.div
+  key={animal.id}
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.97 }}
+  transition={{ type: "spring", stiffness: 300 }}
+  className="cursor-pointer rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl bg-white"
+>
+  {/* 🖼 Image clickable for modal */}
+  <motion.img
+    src={animal.image}
+    alt={animal.name}
+    className="w-full h-72 object-cover"
+    onClick={() => setSelected(animal)}
+  />
+
+  {/* 📝 Content NOT clickable for modal */}
+  <div className="p-6">
+    <h3 className="text-2xl font-semibold text-amber-800 mb-2">
+      {animal.name}
+    </h3>
+    <ReadMore text={animal.description} />
+  </div>
+</motion.div>
+
             ))}
           </div>
         </motion.section>
@@ -166,6 +190,8 @@ Whether you are looking for a retreat, a chance to capture timeless photos, or s
 </AnimatePresence>
 
 
+
     </div>
+    
   );
 }

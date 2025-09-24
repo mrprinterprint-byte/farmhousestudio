@@ -7,19 +7,19 @@ const studios = [
   {
     name: "Studio A",
     desc: "Bright natural light, great for portraits.",
-    img: "/studio-a.jpg", // replace with your image
+    img: "/studio1.jpg", 
     calendly: "https://tidycal.com/mrprinterprint/60-minute-meeting",
   },
   {
     name: "Studio B",
     desc: "Rustic vibes, perfect for farmhouse themes.",
-    img: "/studio-b.jpg",
+    img: "/studio2.jpg",
     calendly: "https://tidycal.com/mrprinterprint/60-minute-meeting",
   },
   {
     name: "Studio C",
     desc: "Modern setup with premium backdrops.",
-    img: "/studio-c.jpg",
+    img: "/studio3.jpg",
     calendly: "https://tidycal.com/mrprinterprint/60-minute-meeting",
   },
 ];

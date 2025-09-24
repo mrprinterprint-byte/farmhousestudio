@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image"; 
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -23,7 +23,6 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
 
-  // Handle scroll behavior
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > lastScrollY) {
@@ -33,7 +32,6 @@ export default function Navbar() {
       }
       setLastScrollY(window.scrollY);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
@@ -41,64 +39,61 @@ export default function Navbar() {
   return (
     <motion.nav
       initial={{ y: 0 }}
-      animate={{ y: showNav ? 0 : -120 }} // navbar moves out when scrolling
+      animate={{ y: showNav ? 0 : -120 }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="border-b shadow-sm py-6 sticky top-0 bg-white z-50" // ✅ more padding
+      className="border-b shadow-sm sticky top-0 bg-white z-50"
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-12">
-        {/* ✅ Bigger Logo */}
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-12 h-20">
+        {/* ✅ Responsive Logo  */}
         <Link href="/" className="flex items-center">
           <Image
             src="/logo.png"
             alt="Farmhouse Studio Logo"
-            width={100}   // doubled
-            height={100}  // doubled
-            className="object-contain"
+            width={200}
+            height={200}
+            className="object-contain w-26 sm:w-30 md:w-35 lg:w-50"
           />
         </Link>
 
-        {/* ✅ Desktop Nav Larger */}
-        <ul className="hidden md:flex gap-12 text-xl font-semibold text-gray-700 relative">
+        {/* ✅ Desktop Nav */}
+        <ul className="hidden md:flex gap-8 text-xl font-semibold text-gray-700">
           {navLinks.map((link) => {
             const isActive = pathname === link.path;
             return (
               <li key={link.path} className="relative group">
                 <Link
                   href={link.path}
-                  className={`hover:text-black relative ${
+                  className={`hover:text-black ${
                     isActive ? "text-black font-bold" : ""
                   }`}
                 >
                   {link.name}
                   {!isActive && (
-                    <span className="absolute left-0 -bottom-2 h-[3px] w-0 bg-black transition-all duration-300 group-hover:w-full"></span>
+                    <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-black transition-all duration-300 group-hover:w-full"></span>
                   )}
                 </Link>
                 {isActive && (
-                  <div className="absolute left-0 right-0 -bottom-2 h-[3px] bg-black"></div>
+                  <div className="absolute left-0 right-0 -bottom-1 h-[2px] bg-black"></div>
                 )}
               </li>
             );
           })}
         </ul>
 
-        {/* Right side icons */}
-        <div className="flex gap-6 items-center">
-  {/* IconButtons */}
-  <IconButtons />
-
-  {/* Mobile menu toggle */}
-  <button
-    className="md:hidden"
-    onClick={() => setIsOpen((prev) => !prev)}
-    aria-label={isOpen ? "Close menu" : "Open menu"} // ✅ ARIA label added
-  >
-    {isOpen ? <X size={32} /> : <Menu size={32} />}
-  </button>
-</div>
+        {/* ✅ Right side icons + Mobile toggle */}
+        <div className="flex items-center gap-4">
+          <IconButtons />
+          <button
+            className="md:hidden"
+            onClick={() => setIsOpen((prev) => !prev)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+          >
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Dropdown */}
+      {/* ✅ Mobile Dropdown */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -106,33 +101,27 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-gray-50 border-t px-8 py-6 space-y-6"
+            className="md:hidden bg-gray-50 border-t px-6 py-6 space-y-6"
           >
-            <ul className="flex flex-col gap-6 text-xl font-semibold text-gray-700">
+            <ul className="flex flex-col gap-6 text-lg font-semibold text-gray-700">
               {navLinks.map((link) => {
                 const isActive = pathname === link.path;
                 return (
                   <li key={link.path} className="relative group">
                     <Link
                       href={link.path}
-                      className={`block relative ${
+                      className={`block ${
                         isActive ? "text-black font-bold" : "hover:text-black"
                       }`}
                       onClick={() => setIsOpen(false)}
                     >
                       {link.name}
-                      {!isActive && (
-                        <span className="absolute left-0 -bottom-2 h-[3px] w-0 bg-black transition-all duration-300 group-hover:w-full"></span>
-                      )}
                     </Link>
-                    {isActive && (
-                      <div className="absolute left-0 right-0 -bottom-2 h-[3px] bg-black"></div>
-                    )}
                   </li>
                 );
               })}
             </ul>
-            <div className="flex gap-8 pt-6 border-t">
+            <div className="flex gap-6 pt-6 border-t">
               <IconButtons />
             </div>
           </motion.div>
