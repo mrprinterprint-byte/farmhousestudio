@@ -3,8 +3,12 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+export const metadata = {
+  title: "Gallery of our farmhouse studio",
+  description: "Animal, and jawdropping photos taken at our farmhouse studio. ",
+}
 
-// Dummy images — replace with your farmhouse studio images
+// imagest that crossponds to gallery 
 const images = [
   "/gallery1.jpg",
   "/gallery2.jpg",
