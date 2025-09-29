@@ -2,10 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-export const metadata = {
-  title: "Our farmhouse studio story",
-  description: "Farmhouse studios that started as hobby turned into a home for many animals.",
-}
+
 
 const animals = [
   {
